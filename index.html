@@ -1,380 +1,150 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ビジネスサイトテンプレート</title>
-    <style>
-        /* リセット & 基本スタイル */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .btn {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        .btn:hover {
-            background: #2980b9;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        section {
-            padding: 80px 0;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        .section-title p {
-            color: #7f8c8d;
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* ヘッダー */
-        header {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        .nav-links li {
-            margin-left: 30px;
-        }
-        .nav-links a {
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: #3498db;
-        }
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* ヒーローセクション */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-        }
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        .hero-text {
-            flex: 1;
-        }
-        .hero-text h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-        .hero-text p {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-        }
-        .hero-image {
-            flex: 1;
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* 特徴セクション */
-        .features {
-            background: #f8f9fa;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .feature-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            text-align: center;
-        }
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        .feature-icon {
-            font-size: 3rem;
-            color: #3498db;
-            margin-bottom: 20px;
-        }
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-
-        /* その他のセクションスタイル... */
-        /* 実際のプロジェクトではここにAbout, Services, Portfolioなどのスタイルを追加 */
-
-        /* フッター */
-        footer {
-            background: #2c3e50;
-            color: white;
-            padding: 60px 0 20px;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            width: 50px;
-            height: 3px;
-            background: #3498db;
-        }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        .footer-links a {
-            color: #bdc3c7;
-            transition: color 0.3s;
-        }
-        .footer-links a:hover {
-            color: #3498db;
-        }
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #bdc3c7;
-        }
-
-        /* レスポンシブデザイン */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            .hero-text {
-                margin-bottom: 50px;
-            }
-        }
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: white;
-                flex-direction: column;
-                align-items: center;
-                padding-top: 40px;
-                transition: left 0.3s;
-            }
-            .nav-links.active {
-                left: 0;
-            }
-            .nav-links li {
-                margin: 15px 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wix Template Clone</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- ヘッダー -->
-    <header>
-        <div class="container header-inner">
-            <a href="#" class="logo">Brand</a>
-            <ul class="nav-links">
-                <li><a href="#home">ホーム</a></li>
-                <li><a href="#features">特徴</a></li>
-                <li><a href="#about">会社概要</a></li>
-                <li><a href="#services">サービス</a></li>
-                <li><a href="#contact">お問い合わせ</a></li>
-            </ul>
-            <div class="menu-toggle">☰</div>
-        </div>
-    </header>
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">MyStudio</div>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle">☰</div>
+    </div>
+  </header>
 
-    <!-- ヒーローセクション -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>あなたのビジネスを成長させるソリューション</h1>
-                    <p>私たちは最新の技術と戦略で、ビジネスのデジタル変革をサポートします。</p>
-                    <a href="#contact" class="btn">お問い合わせ</a>
-                </div>
-                <div class="hero-image">
-                    <img src="img/hero-image.jpg" alt="ビジネスソリューション">
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="home" class="hero-section">
+    <div class="container">
+      <h1 class="fade-in">Photography Studio</h1>
+      <p class="fade-in">Capturing your best moments with style and passion.</p>
+      <a href="#projects" class="btn fade-in">View Portfolio</a>
+    </div>
+  </section>
 
-    <!-- 特徴セクション -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>私たちの特徴</h2>
-                <p>他社にはない私たちの強みをご紹介します</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🚀</div>
-                    <h3>高速パフォーマンス</h3>
-                    <p>最適化されたコードでサイトの読み込み速度を最大化</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>完全レスポンシブ</h3>
-                    <p>あらゆるデバイスで美しく表示されるデザイン</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>高度なセキュリティ</h3>
-                    <p>最新のセキュリティ対策でデータを保護</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="about" class="about-section fade-in">
+    <div class="container">
+      <h2>About Us</h2>
+      <p>We are a full-service photography studio based in Tokyo, specializing in wedding, portrait, and event photography. Our mission is to create timeless memories for you and your loved ones.</p>
+    </div>
+  </section>
 
-    <!-- ここに他のセクションを追加 -->
-    <!-- About, Services, Portfolio, Team, Testimonials, Contact など -->
+  <section id="projects" class="gallery-section">
+    <div class="container gallery-grid">
+      <div class="gallery-item fade-in"><img src="assets/images/sample1.jpg" alt="Gallery 1"></div>
+      <div class="gallery-item fade-in"><img src="assets/images/sample2.jpg" alt="Gallery 2"></div>
+      <div class="gallery-item fade-in"><img src="assets/images/sample3.jpg" alt="Gallery 3"></div>
+      <div class="gallery-item fade-in"><img src="assets/images/sample4.jpg" alt="Gallery 4"></div>
+    </div>
+  </section>
 
-    <!-- フッター -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Brand</h3>
-                    <p>デジタル時代のビジネスソリューションを提供します</p>
-                </div>
-                <div class="footer-column">
-                    <h3>リンク</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">ホーム</a></li>
-                        <li><a href="#features">特徴</a></li>
-                        <li><a href="#services">サービス</a></li>
-                        <li><a href="#contact">お問い合わせ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>連絡先</h3>
-                    <ul class="footer-links">
-                        <li>〒100-0000 東京都千代田区</li>
-                        <li>電話: 03-1234-5678</li>
-                        <li>Email: info@example.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Brand. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+  <section id="contact" class="contact-section fade-in">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Email: info@example.com | Tel: 03-1234-5678</p>
+    </div>
+  </section>
 
-    <script>
-        // モバイルメニューのトグル
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 MyStudio. All rights reserved.</p>
+    </div>
+  </footer>
 
-        // スクロール時のヘッダースタイル変更
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.background = 'rgba(255,255,255,0.95)';
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-            } else {
-                header.style.background = 'white';
-            }
-        });
+  <div id="scrollTopBtn">↑</div>
 
-        // スムーズスクロール
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    const header = document.querySelector('.site-header');
+
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+        scrollTopBtn.style.display = 'block';
+      } else {
+        header.classList.remove('scrolled');
+        scrollTopBtn.style.display = 'none';
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = {
+      threshold: 0,
+      rootMargin: "0px 0px -100px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Arial', sans-serif; line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container { width: 90%; margin: auto; max-width: 1200px; }
+
+    .site-header { background: transparent; padding: 20px 0; position: fixed; width: 100%; top: 0; z-index: 1000; transition: background 0.3s ease; }
+    .site-header.scrolled { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-menu ul { display: flex; gap: 20px; }
+    .nav-menu ul li a { padding: 8px 12px; transition: background 0.3s; font-weight: bold; }
+    .nav-menu ul li a:hover { background: #eee; border-radius: 4px; }
+    .menu-toggle { display: none; cursor: pointer; font-size: 24px; }
+
+    .hero-section { height: 100vh; background: url('assets/images/hero.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: #fff; }
+    .hero-section h1 { font-size: 48px; margin-bottom: 20px; }
+    .hero-section p { font-size: 20px; margin-bottom: 20px; }
+    .btn { padding: 10px 20px; background: #000; color: #fff; border-radius: 30px; margin-top: 20px; display: inline-block; }
+
+    .about-section, .contact-section { padding: 80px 0; text-align: center; background: #f9f9f9; }
+    .about-section h2, .contact-section h2 { font-size: 36px; margin-bottom: 20px; }
+
+    .gallery-section { padding: 80px 0; background: #fff; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .gallery-item img { width: 100%; height: auto; display: block; }
+
+    .site-footer { background: #333; color: #fff; padding: 40px 0; text-align: center; }
+
+    #scrollTopBtn { position: fixed; bottom: 30px; right: 30px; background: #000; color: #fff; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; display: none; z-index: 999; }
+
+    @media (max-width: 768px) {
+      .nav-menu { display: none; flex-direction: column; background: #fff; position: absolute; top: 80px; right: 20px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+      .nav-menu.active { display: flex; }
+      .menu-toggle { display: block; }
+    }
+
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in.appear { opacity: 1; transform: translateY(0); }
+  </style>
+
 </body>
 </html>
