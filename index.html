@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VISTA.IO</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -38,13 +40,20 @@
       gap: 20px;
     }
     .hero {
-      background: url('https://static.wixstatic.com/media/84770f_54c24bcb9e6a45b99f1d8451d125c7d2~mv2.jpg/v1/fill/w_1903,h_600,al_c,q_85,enc_auto/84770f_54c24bcb9e6a45b99f1d8451d125c7d2~mv2.jpg') center/cover no-repeat;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      z-index: 0;
     }
     .hero h1 {
       font-size: 2.5em;
@@ -145,6 +154,8 @@
   </style>
 </head>
 <body>
+  <div id="particles-js"></div>
+
   <header>
     <div class="logo">VISTA.IO</div>
     <nav id="nav">
@@ -201,7 +212,8 @@
     </div>
   </section>
 
-  <section class="section" style="text-align:center">
+  <section class="section" style="text-align:center; position: relative;">
+    <div id="globe-container" style="width: 100%; height: 300px;"></div>
     <h2>あなたのビジネス成長を加速しませんか？</h2>
     <button class="btn">今すぐ始める</button>
   </section>
@@ -234,6 +246,46 @@
       toggle.addEventListener("click", () => {
         nav.classList.toggle("active");
       });
+
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 60 },
+          size: { value: 3 },
+          color: { value: "#ffffff" },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2
+          }
+        }
+      });
+
+      // Three.js globe
+      const container = document.getElementById("globe-container");
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / 300, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
+      renderer.setSize(container.clientWidth, 300);
+      container.appendChild(renderer.domElement);
+
+      const geometry = new THREE.SphereGeometry(1.5, 32, 32);
+      const material = new THREE.PointsMaterial({ color: 0x00ffff, size: 0.03 });
+      const sphere = new THREE.Points(geometry, material);
+      scene.add(sphere);
+      camera.position.z = 5;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        sphere.rotation.y += 0.002;
+        renderer.render(scene, camera);
+      }
+      animate();
     });
   </script>
 </body>
