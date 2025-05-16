@@ -13,32 +13,103 @@
       margin: 0;
       padding: 0;
     }
+    
     body {
       font-family: 'Noto Sans JP', sans-serif;
       background: #0a0a0a;
       color: #fff;
       line-height: 1.6;
+      overflow-x: hidden;
     }
+    
     a {
       color: #fff;
       text-decoration: none;
+      transition: opacity 0.3s;
     }
+    
+    a:hover {
+      opacity: 0.8;
+    }
+    
+    /* ヘッダー */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
-      position: relative;
-      z-index: 10;
+      padding: 20px 5%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
     }
+    
+    header.scrolled {
+      padding: 15px 5%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
     header .logo {
-      font-size: 1.2em;
+      font-size: 1.5em;
       font-weight: bold;
     }
+    
     nav {
       display: flex;
-      gap: 20px;
+      gap: 30px;
     }
+    
+    nav a {
+      position: relative;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ff4f5a;
+      transition: width 0.3s;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 101;
+    }
+    
+    .menu-toggle span {
+      height: 3px;
+      width: 30px;
+      background: white;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+    
+    /* ヒーローセクション */
     .hero {
       height: 100vh;
       display: flex;
@@ -48,121 +119,325 @@
       text-align: center;
       position: relative;
       z-index: 1;
+      padding: 0 20px;
+      margin-top: 0;
     }
+    
     #particles-js {
       position: absolute;
       width: 100%;
       height: 100vh;
       z-index: 0;
+      top: 0;
+      left: 0;
     }
+    
     .hero h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    .hero p {
+      font-size: clamp(2rem, 5vw, 3.5rem);
       margin-bottom: 20px;
+      line-height: 1.2;
     }
+    
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      margin-bottom: 30px;
+      max-width: 800px;
+    }
+    
     .btn {
       background: #ff4f5a;
       color: #fff;
-      padding: 10px 20px;
+      padding: 12px 30px;
       border: none;
+      border-radius: 4px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s;
+      font-size: 1rem;
+      font-weight: 600;
+      display: inline-block;
     }
+    
     .btn:hover {
       background: #e0414d;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 79, 90, 0.3);
     }
+    
+    /* セクション共通 */
     .section {
-      padding: 60px 20px;
-      max-width: 1000px;
+      padding: 80px 5%;
+      max-width: 1200px;
       margin: 0 auto;
     }
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 20px;
+    
+    .section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
     }
+    
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #ff4f5a;
+    }
+    
+    /* 特徴セクション */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
     .feature {
       background: #111;
-      padding: 20px;
-      flex: 1 1 calc(50% - 20px);
+      padding: 30px;
       border-radius: 8px;
-    }
-    .numbers {
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
       display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+      font-size: 1.1rem;
+      font-weight: 600;
     }
+    
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* 数字セクション */
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    
     .numbers div {
-      flex: 1 1 100px;
       padding: 20px;
     }
+    
+    .numbers h3 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #ff4f5a;
+      margin-bottom: 10px;
+    }
+    
+    .numbers p {
+      font-size: 1rem;
+    }
+    
+    /* パートナーセクション */
     .partners {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
+      gap: 40px;
       padding: 40px 0;
     }
+    
     .partner-logo {
-      width: 120px;
+      width: clamp(100px, 15vw, 150px);
       height: auto;
-      margin: 10px;
-      filter: grayscale(100%);
+      filter: grayscale(100%) brightness(1.5);
+      transition: filter 0.3s, transform 0.3s;
     }
+    
+    .partner-logo:hover {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.05);
+    }
+    
+    /* CTA セクション */
+    .cta-section {
+      text-align: center;
+      position: relative;
+      padding: 100px 5%;
+    }
+    
+    #globe-container {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 40px;
+    }
+    
+    .cta-section h2 {
+      margin-bottom: 30px;
+    }
+    
+    /* フッター */
     .footer {
       background: #111;
-      padding: 40px 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      padding: 60px 5%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
     }
-    .footer div {
-      flex: 1 1 200px;
+    
+    .footer h4 {
+      font-size: 1.2rem;
       margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
     }
+    
+    .footer h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: #ff4f5a;
+    }
+    
+    .footer p {
+      margin-bottom: 10px;
+    }
+    
+    .footer input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: #222;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 4px;
+    }
+    
+    .footer .btn {
+      width: 100%;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding: 20px;
+      background: #0a0a0a;
+      font-size: 0.9rem;
+    }
+    
+    /* レスポンシブ対応 */
+    @media screen and (max-width: 992px) {
+      .section {
+        padding: 60px 5%;
+      }
+    }
+    
     @media screen and (max-width: 768px) {
+      header {
+        padding: 15px 5%;
+      }
+      
       nav {
         display: none;
         flex-direction: column;
-        background: #000;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        width: 200px;
-        border: 1px solid #333;
-        padding: 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.95);
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        z-index: 99;
+        font-size: 1.3rem;
+        transition: all 0.3s ease;
+        opacity: 0;
+        pointer-events: none;
       }
+      
       nav.active {
         display: flex;
+        opacity: 1;
+        pointer-events: all;
       }
+      
       .menu-toggle {
         display: flex;
-        flex-direction: column;
-        cursor: pointer;
       }
-      .menu-toggle span {
-        height: 3px;
-        width: 25px;
-        background: white;
-        margin: 4px 0;
+      
+      .section {
+        padding: 50px 5%;
       }
+      
+      .hero h1 {
+        margin-top: 50px;
+      }
+      
+      #globe-container {
+        height: 250px;
+      }
+    }
+    
+    @media screen and (max-width: 576px) {
+      .section {
+        padding: 40px 5%;
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+      }
+      
+      .numbers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .partner-logo {
+        width: 100px;
+      }
+      
+      #globe-container {
+        height: 200px;
+      }
+      
+      .footer {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* アニメーション */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
 
-  <header>
+  <header id="header">
     <div class="logo">VISTA.IO</div>
     <nav id="nav">
       <a href="#">ホーム</a>
       <a href="#">サービス</a>
       <a href="#">ビジョン</a>
       <a href="#">ブログ</a>
+      <a href="#">お問い合わせ</a>
     </nav>
     <div class="menu-toggle" id="menu-toggle">
       <span></span><span></span><span></span>
@@ -170,39 +445,68 @@
   </header>
 
   <section class="hero">
-    <h1>データ分析の新しい価値</h1>
-    <p>データを活用してビジネスをあゆゆる角度から推進できる</p>
-    <button class="btn">詳しくはこちら</button>
+    <h1 class="fade-in">データ分析の新しい価値</h1>
+    <p class="fade-in">データを活用してビジネスをあらゆる角度から推進できる</p>
+    <button class="btn fade-in">詳しくはこちら</button>
   </section>
 
-  <section class="section">
+  <section class="section fade-in">
     <h2>特徴</h2>
     <div class="features">
-      <div class="feature">クラウド環境の提供</div>
-      <div class="feature">データサイエンスの最前線</div>
-      <div class="feature">アプリケーションの多様性</div>
-      <div class="feature">充実したカスタマーサービス</div>
+      <div class="feature">
+        <h3>クラウド環境の提供</h3>
+        <p>最新のクラウド技術を活用し、どこからでもアクセス可能なデータ分析環境を提供します。</p>
+      </div>
+      <div class="feature">
+        <h3>データサイエンスの最前線</h3>
+        <p>最先端のAI技術と機械学習アルゴリズムを駆使し、複雑なデータから価値ある洞察を導き出します。</p>
+      </div>
+      <div class="feature">
+        <h3>アプリケーションの多様性</h3>
+        <p>様々な業界・分野に対応したカスタマイズ可能なアプリケーションで、あらゆるビジネスニーズに応えます。</p>
+      </div>
+      <div class="feature">
+        <h3>充実したカスタマーサービス</h3>
+        <p>24時間365日のサポート体制で、お客様のデータ活用を全面的にバックアップします。</p>
+      </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section fade-in">
     <h2>かつてない速度と信頼性</h2>
-    <p>VISTA.IOは圧倒的な処理スピードと安定性で、あらゆるデータ分析の要望に応えます。</p>
-    <button class="btn">詳しくはこちら</button>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">VISTA.IOは圧倒的な処理スピードと安定性で、あらゆるデータ分析の要望に応えます。ビッグデータの処理から、リアルタイム分析まで、あらゆるスケールに対応可能です。</p>
+    <div style="text-align: center;">
+      <button class="btn">詳しくはこちら</button>
+    </div>
   </section>
 
-  <section class="section">
+  <section class="section fade-in">
     <h2>数字で見る VISTA.IO</h2>
     <div class="numbers">
-      <div><h3>15</h3><p>提供年数</p></div>
-      <div><h3>10K</h3><p>デバイスユーザー数</p></div>
-      <div><h3>25M</h3><p>ダウンロード件数</p></div>
-      <div><h3>22</h3><p>支社数</p></div>
-      <div><h3>5</h3><p>五大陸展開</p></div>
+      <div>
+        <h3>15</h3>
+        <p>提供年数</p>
+      </div>
+      <div>
+        <h3>10K+</h3>
+        <p>デバイスユーザー数</p>
+      </div>
+      <div>
+        <h3>25M+</h3>
+        <p>ダウンロード件数</p>
+      </div>
+      <div>
+        <h3>22</h3>
+        <p>支社数</p>
+      </div>
+      <div>
+        <h3>5</h3>
+        <p>五大陸展開</p>
+      </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section fade-in">
     <h2>パートナー</h2>
     <div class="partners">
       <img src="img3/1.jpg" class="partner-logo" alt="MIKRON">
@@ -212,9 +516,10 @@
     </div>
   </section>
 
-  <section class="section" style="text-align:center; position: relative;">
-    <div id="globe-container" style="width: 100%; height: 300px;"></div>
+  <section class="cta-section fade-in">
+    <div id="globe-container"></div>
     <h2>あなたのビジネス成長を加速しませんか？</h2>
+    <p style="max-width: 800px; margin: 0 auto 30px;">VISTA.IOのデータ分析ソリューションで、ビジネスの可能性を最大限に引き出しましょう。</p>
     <button class="btn">今すぐ始める</button>
   </section>
 
@@ -226,30 +531,66 @@
       <p>〒123-4567 東京都渋谷区道玄坂0-0-0</p>
     </div>
     <div>
-      <h4>ナビ</h4>
+      <h4>ナビゲーション</h4>
       <p><a href="#">ホーム</a></p>
       <p><a href="#">サービス</a></p>
       <p><a href="#">ビジョン</a></p>
       <p><a href="#">ブログ</a></p>
+      <p><a href="#">お問い合わせ</a></p>
     </div>
     <div>
-      <h4>ニュース登録</h4>
+      <h4>ニュースレター登録</h4>
+      <p>最新情報をメールでお届けします</p>
       <input type="email" placeholder="メールアドレス">
       <button class="btn">送信</button>
     </div>
   </footer>
+  
+  <div class="copyright">
+    &copy; 2024 VISTA.IO All Rights Reserved.
+  </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // モバイルメニュー
       const toggle = document.getElementById("menu-toggle");
       const nav = document.getElementById("nav");
+      
       toggle.addEventListener("click", () => {
+        toggle.classList.toggle("active");
         nav.classList.toggle("active");
+        document.body.style.overflow = nav.classList.contains("active") ? "hidden" : "";
       });
-
+      
+      // ナビゲーションリンクをクリックしたらメニューを閉じる
+      const navLinks = document.querySelectorAll("nav a");
+      navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          toggle.classList.remove("active");
+          nav.classList.remove("active");
+          document.body.style.overflow = "";
+        });
+      });
+      
+      // スクロールでヘッダーのスタイルを変更
+      const header = document.getElementById("header");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+      
+      // パーティクル設定
+      const isMobile = window.innerWidth < 768;
+      
       particlesJS("particles-js", {
         particles: {
-          number: { value: 60 },
+          number: { 
+            value: isMobile ? 30 : 60,
+            density: { enable: true, value_area: 800 }
+          },
           size: { value: 3 },
           color: { value: "#ffffff" },
           line_linked: {
@@ -265,27 +606,64 @@
           }
         }
       });
-
-      // Three.js globe
+      
+      // Three.js グローブ
       const container = document.getElementById("globe-container");
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / 300, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ alpha: true });
-      renderer.setSize(container.clientWidth, 300);
+      
+      // レスポンシブ対応のカメラ設定
+      const aspectRatio = container.clientWidth / container.clientHeight;
+      const camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
+      
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
       container.appendChild(renderer.domElement);
-
+      
+      // 球体の作成
       const geometry = new THREE.SphereGeometry(1.5, 32, 32);
-      const material = new THREE.PointsMaterial({ color: 0x00ffff, size: 0.03 });
+      const material = new THREE.PointsMaterial({ 
+        color: 0x00ffff, 
+        size: isMobile ? 0.04 : 0.03 
+      });
       const sphere = new THREE.Points(geometry, material);
       scene.add(sphere);
       camera.position.z = 5;
-
+      
+      // リサイズ対応
+      window.addEventListener('resize', () => {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      });
+      
       function animate() {
         requestAnimationFrame(animate);
         sphere.rotation.y += 0.002;
         renderer.render(scene, camera);
       }
       animate();
+      
+      // スクロールアニメーション
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      function checkFade() {
+        fadeElements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          
+          if (elementTop < windowHeight * 0.9) {
+            element.classList.add('visible');
+          }
+        });
+      }
+      
+      // 初期チェック
+      checkFade();
+      
+      // スクロール時にチェック
+      window.addEventListener('scroll', checkFade);
     });
   </script>
 </body>
