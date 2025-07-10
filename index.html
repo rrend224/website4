@@ -514,7 +514,7 @@
       </div>
     </div>
   </section>
-
+<div id="cloud-container"></div>
   <section class="section fade-in">
     <h2>パートナー</h2>
     <div class="partners">
@@ -674,6 +674,18 @@
       // スクロール時にチェック
       window.addEventListener('scroll', checkFade);
     });
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script>
+  particlesJS('cloud-container', {
+    particles: {
+      number: { value: 30 },
+      shape: { type: 'image', image: { src: 'cloud.png', width: 200, height: 100 } },
+      opacity: { value: 0.5, anim: { enable: true, speed: 1 } },
+      size: { value: 100 },
+      move: { speed: 1, direction: 'right', out_mode: 'out' }
+    },
+    interactivity: { events: { onhover: { enable: false }, onclick: { enable: false } } }
+  });
   </script>
 </body>
 </html>
